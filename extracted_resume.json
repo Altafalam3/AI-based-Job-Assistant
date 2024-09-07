@@ -1,0 +1,166 @@
+{
+   "name": "Altaf Alam",
+   "email": "altaf.alam0032@gmail.com",
+   "phone_number": "+91 9987175589",
+   "address": null,
+   "education": [
+       {
+           "qualification": "BE in IT",
+           "university": "University of Mumbai",
+           "college": "Thadomal Shahani Engineering College",
+           "cgpa": "8.74/10.0",
+           "year": "2025 (exp)"
+       },
+       {
+           "qualification": "HSC (12th Grade)",
+           "university": "State Board",
+           "college": "Guru Nanak Khalsa College",
+           "cgpa": "90.83%",
+           "year": "2021"
+       },
+       {
+           "qualification": "MHT CET",
+           "university": "Maharashtra Board",
+           "college": "Guru Nanak Khalsa College",
+           "cgpa": "97.98%",
+           "year": "2021"
+       }
+   ],
+   "skills": {
+       "web": [
+           "React.js",
+           "Express.js",
+           "HTML",
+           "CSS",
+           "Flask",
+           "Django",
+           "Javascript",
+           "Redis",
+           "Next.js"
+       ],
+       "languages": [
+           "Cpp",
+           "Python",
+           "Java",
+           "C"
+       ],
+       "databases": [
+           "MongoDB",
+           "MySQL"
+       ],
+       "platforms": [
+           "GitHub",
+           "Cloudinary",
+           "Firebase"
+       ],
+       "tools": [
+           "Git",
+           "Canva",
+           "Postman"
+       ]
+   },
+   "experience": [
+       {
+           "company": "Digiidunia",
+           "position": "Web Developer Intern",
+           "duration": "Jun 2023 - August 2023",
+           "achievements": [
+               "Developed backend with Express.js, integrated MongoDB, decreased loading time by optimizing queries and using Redis.",
+               "Built client-side with React.js and CSS, enhancing user experience with efficient data fetching and server rate limiting."
+           ]
+       }
+   ],
+   "projects": [
+       {
+           "name": "EcoSavvy",
+           "technologies": [
+               "React.js",
+               "CSS (Tailwind)",
+               "CNN (ML Model)",
+               "Django",
+               "Mysql"
+           ],
+           "description": "EcoSavvy uses computer vision to enable efficient waste management and recycling practices. It is based on an ML model built using CNN which segregates waste into 11 different classes. It is trained over 8000 data samples to segregate the waste in corresponding class.",
+           "github": "GitHub",
+           "demo": "Demo"
+       },
+       {
+           "name": "SmartLegalX",
+           "technologies": [
+               "React.js",
+               "CSS",
+               "Flask",
+               "Express.js",
+               "Node.js",
+               "Llama27b",
+               "t5 model",
+               "MongoDB"
+           ],
+           "description": "Developed a chatbot for instant legal document queries, integrated with WhatsApp for accessibility and marketing. Implemented a user-friendly form-based system for generating legal documents, enhancing accessibility. Users receive a summarized version of the legal document for simplified understanding for the uploaded PDF, along with multilingual support and access to a resource hub.",
+           "github": "GitHub",
+           "demo": "Demo"
+       },
+       {
+           "name": "NutriSure",
+           "technologies": [
+               "React Native",
+               "CSS",
+               "Flask",
+               "Transformers",
+               "MongoDB"
+           ],
+           "description": "NutriSure instantly identifies allergens, dietary adherence, and religious considerations when users scan a product. Utilize ML-powered recipe generator aligned with dietary preferences, Community Engagement, Store Locator.",
+           "github": "GitHub",
+           "demo": "Demo"
+       },
+       {
+           "name": "PhishNet",
+           "technologies": [
+               "React.js",
+               "CSS",
+               "Flask",
+               "Express.js",
+               "MongoDB",
+               "Python"
+           ],
+           "description": "PhishNet automates the phishing domain detection and calculates probability scores based on website similarity. It implements TypoSquatting and utilizes a Chrome Extension to detect whether the current domain is safe or not.",
+           "github": "GitHub",
+           "demo": "Demo"
+       }
+   ],
+   "extra_curricular": [
+       {
+           "event": "Vega Hackathon",
+           "position": "1st",
+           "year": "2024"
+       },
+       {
+           "event": "Crescendo Hackathon",
+           "position": "1st Runner-Up",
+           "year": "2024"
+       },
+       {
+           "event": "RUBIX'24 Hackathon",
+           "position": "2nd Runner-Up",
+           "year": "2024"
+       },
+       {
+           "event": "LeetCode Biweekly Contest 135",
+           "position": "Ranked 2010",
+           "year": null
+       },
+       {
+           "event": "Chess",
+           "position": "DSO LEVEL",
+           "year": "2019, 2020"
+       }
+   ],
+   "committees_and_clubs": [
+       {
+           "committee": "Training Placement Cell",
+           "position": "Envoy",
+           "duration": "July 2024 - Present",
+           "description": "Serve as the main communicator and facilitator between TPO and students during placement drives, gaining valuable experience in leadership and communication."
+       }
+   ]
+}
