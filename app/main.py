@@ -1,7 +1,6 @@
 import streamlit as st
 from langchain_community.document_loaders import WebBaseLoader
-import json
-import os, base64
+import base64
 
 from chains import Chain
 from utils import extract_raw_text_from_pdf, create_formatted_cover_letter_docx

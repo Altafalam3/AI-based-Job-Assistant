@@ -2,9 +2,7 @@ import re
 import pdfplumber
 from docx import Document
 from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
-from docx.shared import Pt, RGBColor
-from docx.oxml.ns import qn
-from docx.oxml import OxmlElement
+from docx.shared import Pt
 
 def extract_raw_text_from_pdf(file_path):
     resume_text = ''
