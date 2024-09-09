@@ -6,7 +6,7 @@ from chains import Chain
 from utils import extract_raw_text_from_pdf, create_formatted_cover_letter_docx
 
 def create_streamlit_app(llm):
-    st.title("📄 Cover Letter Generator & Chat Assistant")
+    st.title("📄 AI Based Job Assistant")
 
     col1, col2 = st.columns([1, 3])
 
@@ -51,7 +51,7 @@ def create_streamlit_app(llm):
     # Chat and Cover Letter Generation section (on the right)
     with col2:
         # Chat section for interacting with LLM
-        st.write("### Chat with LLM Assistant")
+        st.write("### Chat with AI Assistant")
 
         # Chat input
         chat_input = st.text_input("Ask for resume improvements, job advice, or any other question:")

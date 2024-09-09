@@ -2,7 +2,7 @@ import re
 import pdfplumber
 from docx import Document
 from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
-from docx.shared import Pt
+from docx.shared import Pt, Inches
 
 def extract_raw_text_from_pdf(file_path):
     resume_text = ''
@@ -27,6 +27,13 @@ def clean_text(text):
 def create_formatted_cover_letter_docx(cover_letter_text, filename='cover_letter.docx'):
     # Create a new Document
     doc = Document()
+    
+    # Adjust left and right margins
+    sections = doc.sections
+    for section in sections:
+        section.left_margin = Inches(0.5)  # Set left margin to 0.5 inches
+        section.right_margin = Inches(0.5)  # Set right margin to 0.5 inches
+
 
     # Split the cover letter into paragraphs
     cover_letter_sections = cover_letter_text.split("\n\n")

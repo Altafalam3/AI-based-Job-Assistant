@@ -23,7 +23,7 @@ def display_customization_options():
     st.sidebar.title('Customization')
     model = st.sidebar.selectbox(
         'Choose a model',
-        ['llama-3.1-70b-versatile', 'llama-3.1-8b-instant', 'whisper-large-v3', 'distil-whisper-large-v3-en', 'mixtral-8x7b-32768', 'gemma-7b-it'],
+        ['llama-3.1-70b-versatile', 'llama-3.1-8b-instant', 'mixtral-8x7b-32768', 'gemma-7b-it'],
         key='model_selectbox'
     )
     return model
@@ -80,8 +80,8 @@ def main():
 
     initialize_session_state()
 
-    st.title("Lightning ⚡️")
-    st.markdown("Chat with Lightning, an ultra-fast AI chatbot powered by Groq LPUs!")
+    st.title("AI Assistant ⚡️")
+    st.markdown("Your go-to for any doubts!")
 
     model = display_customization_options()
 
