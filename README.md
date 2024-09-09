@@ -16,7 +16,7 @@ The **AI-Driven Job Application Assistant** is designed to address these challen
 - **Resume Matching with Job Descriptions:** 
   The tool extracts key details from job links and matches them with the user's resume. It suggests updates and improvements to help users align their resumes more effectively with job requirements.
 
-- **Tone Flexibility for Cover Letters:** 
+- **Tone Flexibility:** 
   Offers flexibility in crafting cover letters with varying tones, from highly professional to more conversational, depending on the target recipient (e.g., formal for companies, informal for alumni or mentors).
 
 - **Emotional Support Chatbot:** 
