@@ -1,9 +1,10 @@
 import streamlit as st
 from langchain_community.document_loaders import WebBaseLoader
 import json
+import os, base64
 
 from chains import Chain
-from utils import extract_raw_text_from_pdf
+from utils import extract_raw_text_from_pdf, create_formatted_cover_letter_docx
 
 def create_streamlit_app(llm):
     st.title("📄 Cover Letter Generator & Chat Assistant")
@@ -28,7 +29,7 @@ def create_streamlit_app(llm):
             st.session_state["job_url"] = url_input
         
         # Submit button for JD processing
-        submit_button = st.button("Submit")
+        submit_button = st.button("Extract Job Details")
 
         # Job data extraction when submit button is pressed
         if submit_button:
@@ -58,6 +59,8 @@ def create_streamlit_app(llm):
         
         # Chat functionality
         if st.button("Send"):
+            st.session_state["generate_cover_letter"] = False  # Reset state after showing
+
             try:
                 resume_info = st.session_state.get("resume_info", None)
                 jobs = st.session_state.get("job_data", None)
@@ -67,24 +70,44 @@ def create_streamlit_app(llm):
                     response = llm.chat_with_llm(chat_input, resume_info=resume_info)
                 else:
                     response = llm.chat_with_llm(chat_input)
-                
+
                 st.write(f"### AI:\n {response}")
             except Exception as e:
                 st.error(f"An error occurred while chatting: {e}")
-        
+
         # Show the cover letter output in the right column if button clicked
         if st.session_state.get("generate_cover_letter", False):
             if "resume_info" in st.session_state and "job_data" in st.session_state:
                 resume_info = st.session_state["resume_info"]
                 jobs = st.session_state["job_data"]
+
                 for job in jobs:
                     cover_letter = llm.write_cover_letter(job, resume_info)
                     st.markdown(f"### Cover Letter for {job['role']} at {job['company_name']}")
-                    st.code(cover_letter, language='markdown')
+
+                    # Editable text box for the generated cover letter
+                    cover_letter_text = st.text_area("Edit your cover letter here:", value=cover_letter, height=400, key=f"cover_letter_{job['role']}")
+
+                    # Generate and automatically download .docx when clicking the first button
+                    if st.button(f"Download Cover Letter (.docx)", key=f"download_{job['role']}"):
+                        try:
+                            # Generate the .docx file
+                            docx_file_path = create_formatted_cover_letter_docx(cover_letter_text)
+
+                            # Use st.markdown to automatically trigger download without a button
+                            with open(docx_file_path, "rb") as docx_file:
+                                docx_data = docx_file.read()
+                                b64 = base64.b64encode(docx_data).decode()  # Encode file to base64
+                                
+                                # Automatically download the file using a hidden link
+                                href = f'<a href="data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,{b64}" download="cover_letter_{job["role"]}.docx">Click here if download not started yet</a>'
+                                st.markdown(href, unsafe_allow_html=True)
+                        except KeyError as e:
+                            st.error(f"Missing information in the resume or job details: {e}")
+                        except Exception as e:
+                            st.error(f"An error occurred during .docx generation: {e}")
             else:
                 st.error("Both resume and job details are required for generating a cover letter.")
-            st.session_state["generate_cover_letter"] = False  # Reset state after showing
-
 
 
 if __name__ == "__main__":

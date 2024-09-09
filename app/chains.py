@@ -5,7 +5,6 @@ from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_core.exceptions import OutputParserException
 from dotenv import load_dotenv
-
 load_dotenv()
 
 class Chain:
@@ -68,9 +67,12 @@ class Chain:
         return res if isinstance(res, dict) else {}
 
     def write_cover_letter(self, job, resume_info):
+        date = datetime.date.today().strftime("%B %d, %Y")
         prompt_cover_letter = PromptTemplate.from_template(
             """
-            ### JOB DESCRIPTION:
+            You're a cover letter writing expert. Use the details and instructions below to write a professional and tailored cover letter for a job application.
+
+            ### JOB DESCRIPTION: (job at {company_name} for the {role} position)
             {job_description}
 
             ### CANDIDATE'S RESUME INFORMATION:
@@ -86,14 +88,20 @@ class Chain:
             Committees and Clubs: {committees_and_clubs}
 
             ### INSTRUCTION:
-            Write a formal professional cover letter for the candidate applying to the job at {company_name} for the {role} position. 
-            The cover letter should be professional and emphasize the candidate's skills, experience, and suitability for the role. 
-            Mention how the candidate's background aligns with the job requirements and the company's mission.
-            Maintain a formal tone and structure.
-
+                1. Focus on the job description but don't address every point—match key job requirements with the candidate's resume.
+                2. Paraphrase the details provided; do not copy directly. Present the candidate’s information in a unique and original manner.
+                3. Put yourself in the reader’s shoes. What can you write that will convince the reader that you are ready and able to do the job?
+                4. Keep the cover letter formal, professional, and concise, factual with no more than three paragraphs.
+                5. Emphasize the candidate's most relevant skills, experience, and suitability for the role. If a skill is not listed in the provided information, then I don't have experience in it.
+                6. Highlight how the candidate's background aligns with the job requirements and the company's mission.
+                7. Address the letter to a specific person if possible, and tailor the tone to the organization.
+                8. Avoid flowery language—use action words and give concrete examples to support qualifications.
+                9. End the cover letter with a nice statement about their company reputation or why you’d like towork for them specifically and thank you.
+                10. First section : Name, Address, Email, Phone number, Date : {date}.. Second section : To The hiring manager, then new line company name and address if needed.. 3rd section saluation Dear Hirin manager and then 3 paragraph of body based on above instruction .. Final section sincerely with name 
             ### COVER LETTER (NO PREAMBLE):
             """
         )
+
         chain_cover_letter = prompt_cover_letter | self.llm
         res = chain_cover_letter.invoke({
             "job_description": str(job),
@@ -108,7 +116,8 @@ class Chain:
             "experience": resume_info.get('experience'),
             "projects": resume_info.get('projects'),
             "extra_curricular": resume_info.get('extra_curricular'),
-            "committees_and_clubs": resume_info.get('committees_and_clubs')
+            "committees_and_clubs": resume_info.get('committees_and_clubs'),
+            "date":date
         })
         return res.content
 
