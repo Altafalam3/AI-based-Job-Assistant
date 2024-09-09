@@ -1,7 +1,4 @@
-# 📧 AI Chatbot
-
-**Imagine a scenario:**
-
+# 📧 AI Based Job Assistant
 
 
 
@@ -20,7 +17,3 @@
    ```commandline
    streamlit run app/main.py
    ```
-
-4. Download from: 
-```https://miktex.org/
-```
