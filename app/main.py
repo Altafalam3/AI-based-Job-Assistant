@@ -46,7 +46,17 @@ def create_streamlit_app(llm):
 
         # Quick Cover Letter Generator button (stays on the left)
         if st.button("Quick Cover Letter Generator"):
-            st.session_state["generate_cover_letter"] = True
+            if "resume_info" in st.session_state and "job_data" in st.session_state:
+                resume_info = st.session_state["resume_info"]
+                jobs = st.session_state["job_data"]
+
+                for job in jobs:
+                    cover_letter = llm.write_cover_letter(job, resume_info)
+                    st.session_state[f"cover_letter_text_{job['role']}"] = cover_letter
+
+                st.session_state["generate_cover_letter"] = True
+            else:
+                st.error("Both resume and Job link required to generate cover letter")
 
     # Chat and Cover Letter Generation section (on the right)
     with col2:
@@ -76,38 +86,41 @@ def create_streamlit_app(llm):
 
         # Show the cover letter output in the right column if button clicked
         if st.session_state.get("generate_cover_letter", False):
-            if "resume_info" in st.session_state and "job_data" in st.session_state:
-                resume_info = st.session_state["resume_info"]
-                jobs = st.session_state["job_data"]
+            resume_info = st.session_state["resume_info"]
+            jobs = st.session_state["job_data"]
 
-                for job in jobs:
-                    cover_letter = llm.write_cover_letter(job, resume_info)
-                    st.markdown(f"### Cover Letter for {job['role']} at {job['company_name']}")
+            for job in jobs:
+                st.markdown(f"### Cover Letter for {job['role']} at {job['company_name']}")
 
-                    # Editable text box for the generated cover letter
-                    cover_letter_text = st.text_area("Edit your cover letter here:", value=cover_letter, height=400, key=f"cover_letter_{job['role']}")
+                # Editable text box for the generated cover letter
+                cover_letter_textarea = st.text_area(
+                    "Edit your cover letter here:",
+                    value=st.session_state.get(f"cover_letter_text_{job['role']}", ""),
+                    height=400,
+                    key=f"cover_letter_textarea_{job['role']}"
+                )
 
-                    # Generate and automatically download .docx when clicking the first button
-                    if st.button(f"Download Cover Letter (.docx)", key=f"download_{job['role']}"):
-                        try:
-                            # Generate the .docx file
-                            docx_file_path = create_formatted_cover_letter_docx(cover_letter_text)
+                # Update session state with the latest edited cover letter
+                st.session_state[f"cover_letter_text_{job['role']}"] = cover_letter_textarea
 
-                            # Use st.markdown to automatically trigger download without a button
-                            with open(docx_file_path, "rb") as docx_file:
-                                docx_data = docx_file.read()
-                                b64 = base64.b64encode(docx_data).decode()  # Encode file to base64
-                                
-                                # Automatically download the file using a hidden link
-                                href = f'<a href="data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,{b64}" download="cover_letter_{job["role"]}.docx">Click here if download not started yet</a>'
-                                st.markdown(href, unsafe_allow_html=True)
-                        except KeyError as e:
-                            st.error(f"Missing information in the resume or job details: {e}")
-                        except Exception as e:
-                            st.error(f"An error occurred during .docx generation: {e}")
-            else:
-                st.error("Both resume and job details are required for generating a cover letter.")
+                # Generate and automatically download .docx when clicking the button
+                if st.button(f"Download Cover Letter (.docx)", key=f"download_{job['role']}"):
+                    try:
+                        # Use the updated text from session state
+                        docx_file_path = create_formatted_cover_letter_docx(st.session_state[f"cover_letter_text_{job['role']}"])
 
+                        # Use st.markdown to automatically trigger download without a button
+                        with open(docx_file_path, "rb") as docx_file:
+                            docx_data = docx_file.read()
+                            b64 = base64.b64encode(docx_data).decode()  # Encode file to base64
+                            
+                            # Automatically download the file using a hidden link
+                            href = f'<a href="data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,{b64}" download="cover_letter_{job["role"]}.docx">Click here if download not started yet</a>'
+                            st.markdown(href, unsafe_allow_html=True)
+                    except KeyError as e:
+                        st.error(f"Missing information in the resume or job details: {e}")
+                    except Exception as e:
+                        st.error(f"An error occurred during .docx generation: {e}")
 
 if __name__ == "__main__":
     chain = Chain()
