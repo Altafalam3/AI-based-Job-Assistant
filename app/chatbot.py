@@ -20,13 +20,13 @@ def display_customization_options():
     """
     Add customization options to the sidebar for model selection.
     """
-    st.sidebar.title('Customization')
-    model = st.sidebar.selectbox(
-        'Choose a model',
-        ['llama-3.1-70b-versatile', 'llama-3.1-8b-instant', 'mixtral-8x7b-32768', 'gemma-7b-it'],
-        key='model_selectbox'
-    )
-    return model
+    st.sidebar.title('Chatbot')
+    # model = st.sidebar.selectbox(
+    #     'Choose a model',
+    #     ['llama-3.1-70b-versatile', 'llama-3.1-8b-instant', 'mixtral-8x7b-32768', 'gemma-7b-it'],
+    #     key='model_selectbox'
+    # )
+    # return model
 
 def initialize_groq_chat(groq_api_key, model):
     """
@@ -55,16 +55,33 @@ def process_user_question(user_question, conversation):
 
 def display_chat_history():
     """
-    Display the chat history, including both user questions and AI responses.
+    Display the chat history, including both user questions and AI responses,
+    with reduced margin for the first message.
     """
+    # Add custom CSS to adjust the gap before the first chat message
+    st.markdown(
+        """
+        <style>
+        /* Reduce margin above the first chat message */
+        .stChatMessage:first-child {
+            margin-top: 10px !important; /* Adjust this value to reduce the gap */
+        }
+        /* Adjust the chat container overflow and padding */
+        .chat-container {
+            height: 400px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
     chat_history_container = st.container()
 
     with chat_history_container:
-        st.write(
-            "<div style='height: 400px; overflow-y: auto; padding-right: 10px;'>",
-            unsafe_allow_html=True,
-        )
-        for message in st.session_state.chat_history:
+        st.write("<div class='chat-container'>", unsafe_allow_html=True)
+        for idx, message in enumerate(st.session_state.chat_history):
             with st.chat_message("user"):
                 st.markdown(message['human'])
             if message['AI']:
@@ -72,24 +89,44 @@ def display_chat_history():
                     st.markdown(message['AI'])
         st.write("</div>", unsafe_allow_html=True)
 
+def display_title():
+    """
+    Displays the main title and subtitle with reduced margin.
+    """
+    # Add custom CSS to adjust margin of the markdown element
+    st.markdown(
+        """
+        <style>
+        h1, .markdown-text-container {
+            margin-top: 0px !important;
+            margin-bottom: 0px !important;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+    st.title("AI Assistant ⚡️")
+    st.markdown("Your go-to for any doubts!")
+
 def main():
     """
     The main entry point of the application.
     """
+    st.set_page_config(layout="wide", page_title="Cover Letter Generator & Assistant", page_icon="📄")
     groq_api_key = os.environ['GROQ_API_KEY']
 
     initialize_session_state()
 
-    st.title("AI Assistant ⚡️")
-    st.markdown("Your go-to for any doubts!")
+    # Display the title with reduced margins
+    display_title()
 
     model = display_customization_options()
 
-    if st.session_state.model != model:
-        # Reset chat history and session state when the model is switched
-        st.session_state.chat_history = []
-        st.session_state.model = model
-        st.experimental_rerun()
+    # if st.session_state.model != model:
+    #     # Reset chat history and session state when the model is switched
+    #     st.session_state.chat_history = []
+    #     st.session_state.model = model
+    #     st.experimental_rerun()
 
     # Use ConversationBufferMemory for infinite memory until refresh
     memory = ConversationBufferMemory()

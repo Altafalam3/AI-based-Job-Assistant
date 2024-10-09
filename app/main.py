@@ -15,7 +15,7 @@ def create_streamlit_app(llm):
         uploaded_file = st.file_uploader("Upload your Resume (PDF)", type=["pdf"], key="resume_uploader")
         
         # Automatically process the resume once uploaded
-        if uploaded_file is not None:
+        if uploaded_file is not None and "resume_info" not in st.session_state:
             resume_text = extract_raw_text_from_pdf(uploaded_file)
             resume_info = llm.extract_resume_details(resume_text)
             st.session_state["resume_uploaded"] = uploaded_file
@@ -26,7 +26,7 @@ def create_streamlit_app(llm):
         url_input = st.text_input("Enter the Job URL:", value=st.session_state.get("job_url", "https://rocketlane.freshteam.com/jobs/hzabyJhRp-od/react-frontend-developer"), key="job_url_input")
         if url_input:
             st.session_state["job_url"] = url_input
-        
+
         # Submit button for JD processing
         submit_button = st.button("Extract Job Details")
 
@@ -65,7 +65,7 @@ def create_streamlit_app(llm):
 
         # Chat input
         chat_input = st.text_input("Ask for resume improvements, job advice, or any other question:")
-        
+
         # Chat functionality
         if st.button("Send"):
             st.session_state["generate_cover_letter"] = False  # Reset state after showing
