@@ -37,6 +37,10 @@ def create_streamlit_app(llm):
                     loader = WebBaseLoader([st.session_state["job_url"]])
                     job_data = loader.load().pop().page_content
                     jobs = llm.extract_jobs(job_data)
+                    # jobs = llm.extract_jobs("Proficiency in React, Express.js, Flask, Redis, Mongodb")
+                    # jobs = llm.extract_jobs(
+                    #     "JD : Company name : Gaanaaa, Roles: Musical Expert, knowledge of nodes, classical music, carnatic music, guitar, FUll time , Mumbai"
+                    #     )
                     st.session_state["job_data"] = jobs
                     st.success("Job details extracted and saved!")
                 except Exception as e:
