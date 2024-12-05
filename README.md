@@ -16,17 +16,25 @@ The **AI-Driven Job Application Assistant** is designed to address these challen
 - **Resume Matching with Job Descriptions:** 
   The tool extracts key details from job links and matches them with the user's resume. It suggests updates and improvements to help users align their resumes more effectively with job requirements.
 
-- **Tone Flexibility:** 
-  Offers flexibility in crafting cover letters with varying tones, from highly professional to more conversational, depending on the target recipient (e.g., formal for companies, informal for alumni or mentors).
+- **Chatbot:** 
+  A chatbot feature that provides emotional support, advice based on the resume or job destriction. It helps users navigate the mental challenges of job hunting.
 
-- **Emotional Support Chatbot:** 
-  A chatbot feature that provides emotional support, advice, and a space to vent during the stressful job search process. It helps users navigate the mental challenges of job hunting.
+## Demo
+
+![image](https://github.com/user-attachments/assets/999f96b4-7070-49e0-9881-2dd6516b5157)
+![image](https://github.com/user-attachments/assets/4564fbeb-00bd-43b3-8165-eb3171f401f5)
+![image](https://github.com/user-attachments/assets/a8bb84a6-ed5c-4e40-8f2c-132623d8f90e)
+![image](https://github.com/user-attachments/assets/b6cf53c8-0efe-4202-a160-437dd93554c8)
+![image](https://github.com/user-attachments/assets/746db7bc-c836-48fe-a966-9cf5c6839c4e)
+![image](https://github.com/user-attachments/assets/b397122b-ba6d-4554-8585-f21dee90bf0a)
+
+
+
 
 ## Goals
 
 This solution aims to:
 - Streamline the job application process.
-- Offer mental health support to job seekers.
 - Provide tools that make the entire process more manageable and efficient, reducing stress and improving productivity.
 
 ## Getting Started
