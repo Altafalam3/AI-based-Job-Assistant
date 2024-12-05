@@ -22,11 +22,11 @@ The **AI-Driven Job Application Assistant** is designed to address these challen
 ## Demo
 
 ![image](https://github.com/user-attachments/assets/999f96b4-7070-49e0-9881-2dd6516b5157)
-![image](https://github.com/user-attachments/assets/4564fbeb-00bd-43b3-8165-eb3171f401f5)
-![image](https://github.com/user-attachments/assets/a8bb84a6-ed5c-4e40-8f2c-132623d8f90e)
-![image](https://github.com/user-attachments/assets/b6cf53c8-0efe-4202-a160-437dd93554c8)
-![image](https://github.com/user-attachments/assets/746db7bc-c836-48fe-a966-9cf5c6839c4e)
-![image](https://github.com/user-attachments/assets/b397122b-ba6d-4554-8585-f21dee90bf0a)
+![image1](https://github.com/user-attachments/assets/4564fbeb-00bd-43b3-8165-eb3171f401f5)
+![image2](https://github.com/user-attachments/assets/a8bb84a6-ed5c-4e40-8f2c-132623d8f90e)
+![image3](https://github.com/user-attachments/assets/b6cf53c8-0efe-4202-a160-437dd93554c8)
+![image4](https://github.com/user-attachments/assets/746db7bc-c836-48fe-a966-9cf5c6839c4e)
+![image5](https://github.com/user-attachments/assets/b397122b-ba6d-4554-8585-f21dee90bf0a)
 
 
 
